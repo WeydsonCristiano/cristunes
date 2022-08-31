@@ -1,24 +1,34 @@
-import { render } from '@testing-library/react';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Loading from '../Loading';
 import { getUser } from '../services/userAPI';
 
 class Header extends React.Component {
   state = {
-    loading: false,
+    loading: true,
     user: {},
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.xablau();
+  }
+
+  xablau = async () => {
+    const usuario = await getUser();
+    this.setState({ user: usuario, loading: false });
+  };
 
   render() {
+    const { loading, user } = this.state;
     return (
-      <header data-testid="header-component">
-        <h1 data-testid="header-user-name" />
-      </header>
-
+      <div>
+        {loading ? <Loading /> : (
+          <header data-testid="header-component">
+            <h1 data-testid="header-user-name">{user.name}</h1>
+          </header>
+        )}
+      </div>
     );
   }
 }
+
 export default Header;
