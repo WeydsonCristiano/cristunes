@@ -1,37 +1,56 @@
 import React from 'react';
 import Header from '../components/Header';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import Loading from '../Loading';
 
 class Search extends React.Component {
   state = {
-    bandas: '',
+    loading: false,
+    pesquisar: '',
   };
 
+  componentDidMount() {
+    this.pesquisarBotao();
+  }
+
   handleChanger = ({ target: { value } }) => {
-    this.setState({ bandas: value });
+    this.setState({ pesquisar: value });
+  };
+
+  pesquisarBotao = async () => {
+    const { pesquisar, loading } = this.state;
+    this.setState( loading: true );
+    const resultadoPesquisa = await searchAlbumsAPI({ pesquisar });
+    this.setState({
+      pesquisa: resultadoPesquisa,
+      loading: false,
+    });
   };
 
   render() {
     const magicNumber = 2;
-    const { bandas } = this.state;
+    const { pesquisar } = this.state;
     return (
       <div data-testid="page-search">
         Search
         <Header />
         <div>
-          <label htmlFor="bandas">
+          <label htmlFor="pesquisar">
             Banda Favorita
             <input
-              id="bandas"
+              id="pesquisar"
+              name="pesquisar"
               data-testid="search-artist-input"
               type="text"
               onChange={ this.handleChanger }
-              value={ bandas }
+              value={ pesquisar }
             />
           </label>
           <button
             data-testid="search-artist-button"
+            onClick={ this.pesquisarBotao }
             type="button"
-            disabled={ bandas.length < magicNumber }
+            disabled={ pesquisar.length < magicNumber }
           >
             Pesquisar
           </button>
