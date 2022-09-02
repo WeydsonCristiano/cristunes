@@ -71,8 +71,8 @@ class Search extends React.Component {
           {resultadoPesquisa.length > 0 && resultadoPesquisa.map((e, index) => (
             <Link
               key={ index }
-              data-testid={ `link-to-album-${e.collectionId}` }
               to={ `/album/${e.collectionId}` }
+              data-testid={ `link-to-album-${e.collectionId}` }
             >
               <div>
                 <img src={ e.artworkUrl100 } alt={ e.artistName } />
@@ -87,8 +87,3 @@ class Search extends React.Component {
 }
 
 export default Search;
-// ✕ Será validado se ao clicar em pesquisar, a requisição é feita usando a searchAlbumsAPI (3067 ms)
-// ✕ Será validado se ao clicar no botão, o texto Resultado de álbuns de: <artista> aparece na tela (2646 ms)
-// ✓ Será validado se ao receber o retorno da API, os álbuns são listados na tela (1625 ms)
-// ✕ Será validado se caso a API não retorne nenhum álbum, a mensagem Nenhum álbum foi encontrado é exibida (3014 ms)
-// ✓ Será validado se existe um link para cada álbum listado que redirecione para a rota /album/:id (1665 ms)
