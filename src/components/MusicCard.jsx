@@ -9,7 +9,7 @@ class MusicCard extends React.Component {
     const {
       objTrack: { trackName, previewUrl, trackId },
       objTrack,
-      onInpuntChanger, validacao } = this.props;
+      onInpuntChanger, localStorageData } = this.props;
     return (
       <div>
         <label
@@ -21,7 +21,9 @@ class MusicCard extends React.Component {
             id="favorita"
             name="favorita"
             type="checkbox"
-            defaultChecked={ validacao.some((e) => e.trackId === objTrack.trackId) }
+            defaultChecked={
+              localStorageData.some((e) => e.trackId === objTrack.trackId)
+            }
             onClick={ () => onInpuntChanger(objTrack) }
           />
         </label>
@@ -53,7 +55,7 @@ MusicCard.propTypes = {
     trackId: PropTypes.number,
   }).isRequired,
   onInpuntChanger: PropTypes.func,
-  validacao: PropTypes.arrayOf(PropTypes.object),
+  localStorageData: PropTypes.arrayOf(PropTypes.object),
 }.isRequired;
 
 export default MusicCard;

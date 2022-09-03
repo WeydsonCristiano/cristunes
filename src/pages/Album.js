@@ -33,7 +33,6 @@ class Album extends React.Component {
     this.setState({
       loading: true });
     const { musicFavoritas } = this.state;
-    // console.log(musicFavoritas.some((e) => e.trackId === music.trackId));
     if (musicFavoritas.some((e) => e.trackId === music.trackId)) {
       await removeSong(music);
       await this.requisicaoFavoritos();
@@ -78,7 +77,7 @@ class Album extends React.Component {
                         key={ index }
                         onInpuntChanger={ this.onInpuntChanger }
                         objTrack={ e }
-                        validacao={ musicFavoritas }
+                        localStorageData={ musicFavoritas }
                       />))
                 }
               </ul>
