@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../Loading';
 
 class Album extends React.Component {
   state = {
     api: [],
     loading: false,
+    musicFavoritas: [],
   };
 
   async componentDidMount() {
+    await this.requisicaoFavoritos();
     const { match: { params: { id } } } = this.props;
     const musica = await getMusics(id);
     this.setState({
@@ -20,17 +22,32 @@ class Album extends React.Component {
     });
   }
 
+  requisicaoFavoritos = async () => {
+    const retornoFavoritos = await getFavoriteSongs();
+    this.setState({
+      musicFavoritas: retornoFavoritos,
+    });
+  };
+
   onInpuntChanger = async (music) => {
     this.setState({
       loading: true });
-    await addSong(music);
+    const { musicFavoritas } = this.state;
+    // console.log(musicFavoritas.some((e) => e.trackId === music.trackId));
+    if (musicFavoritas.some((e) => e.trackId === music.trackId)) {
+      await removeSong(music);
+      await this.requisicaoFavoritos();
+    } else {
+      await addSong(music);
+      await this.requisicaoFavoritos();
+    }
     this.setState({
       loading: false,
     });
   };
 
   render() {
-    const { api, loading } = this.state;
+    const { api, loading, musicFavoritas } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
@@ -53,18 +70,17 @@ class Album extends React.Component {
                 </h2>
               </div>
               <ul>
-                {api.length > 0 && api.reduce((Acc, e, index) => {
-                  if (index !== 0) {
-                    Acc.push(
+                {
+                  api
+                    .filter((_, index) => index !== 0)
+                    .map((e, index) => (
                       <MusicCard
                         key={ index }
                         onInpuntChanger={ this.onInpuntChanger }
                         objTrack={ e }
-                      />,
-                    );
-                  }
-                  return Acc;
-                }, []) }
+                        validacao={ musicFavoritas }
+                      />))
+                }
               </ul>
             </>
           )}
