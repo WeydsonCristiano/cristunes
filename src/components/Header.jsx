@@ -1,7 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import Loading from '../Loading';
 import { getUser } from '../services/userAPI';
+import '../Styles/Header.css';
+import image from '../assets/logo2.svg';
+import User from '../assets/user.svg';
 
 class Header extends React.Component {
   state = {
@@ -20,14 +24,62 @@ class Header extends React.Component {
 
   render() {
     const { loading, user } = this.state;
+    const { location: { pathname } } = this.props;
     return (
       <div>
         {loading ? <Loading /> : (
           <header data-testid="header-component">
-            <h1 data-testid="header-user-name">{user.name}</h1>
-            <Link data-testid="link-to-search" to="/search">search</Link>
-            <Link data-testid="link-to-favorites" to="/favorites">favorites</Link>
-            <Link data-testid="link-to-profile" to="/profile">profile</Link>
+            <div className="imagenClass">
+              <Link to="/">
+                <img src={ image } alt="logo" width="150px" height="150px" />
+              </Link>
+              <div className="userClass">
+                <img src={ User } alt="user" />
+                <p
+                  data-testid="header-user-name"
+                >
+                  {user.name}
+                </p>
+              </div>
+
+            </div>
+            <nav className="navClass">
+              <ul>
+                <li>
+                  <Link
+                    data-testid="link-to-search"
+                    to="/search"
+                    style={ { backgroundColor: `${pathname
+                      === '/search' ? 'grey' : 'azure'}` } }
+                  >
+                    search
+
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    data-testid="link-to-favorites"
+                    to="/favorites"
+                    style={ { backgroundColor: `${pathname
+                    === '/favorites' ? 'grey' : 'azure'}` } }
+                  >
+                    favorites
+
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    data-testid="link-to-profile"
+                    to="/profile"
+                    style={ { backgroundColor: `${pathname
+                    === '/profile' ? 'grey' : 'azure'}` } }
+                  >
+                    profile
+
+                  </Link>
+                </li>
+              </ul>
+            </nav>
           </header>
         )}
       </div>
@@ -35,4 +87,10 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default withRouter(Header);

@@ -35,11 +35,12 @@ class Search extends React.Component {
     const { pesquisar, loading, resultadoPesquisa, nomeArtista } = this.state;
     return (
       <div data-testid="page-search">
-        Search
         <Header />
-        <div>
+        <div className="divInput">
           <label htmlFor="pesquisar">
-            Banda Favorita
+            <h2>
+              Banda Favorita
+            </h2>
             <input
               id="pesquisar"
               name="pesquisar"
@@ -63,7 +64,7 @@ class Search extends React.Component {
           { ' ' }
           {nomeArtista}
         </h1>
-        <div>
+        <div className="naoEncontrado">
           { loading && <Loading /> }
           {loading === false && (
             resultadoPesquisa < 1 && <p>Nenhum álbum foi encontrado</p>
@@ -74,9 +75,16 @@ class Search extends React.Component {
               to={ `/album/${e.collectionId}` }
               data-testid={ `link-to-album-${e.collectionId}` }
             >
-              <div>
-                <img src={ e.artworkUrl100 } alt={ e.artistName } />
-                {e.collectionName}
+              <div className="divAlbum">
+                <div>
+                  <img
+                    src={ e.artworkUrl100 }
+                    alt={ e.artistName }
+                  />
+
+                </div>
+                <p>{e.collectionName}</p>
+
               </div>
             </Link>
           ))}
