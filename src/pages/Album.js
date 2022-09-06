@@ -3,18 +3,15 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../Loading';
 
 class Album extends React.Component {
   state = {
     api: [],
-    loading: false,
-    musicFavoritas: [],
   };
 
   async componentDidMount() {
-    await this.requisicaoFavoritos();
+    // await this.requisicaoFavoritos();
     const { match: { params: { id } } } = this.props;
     const musica = await getMusics(id);
     this.setState({
@@ -22,31 +19,9 @@ class Album extends React.Component {
     });
   }
 
-  requisicaoFavoritos = async () => {
-    const retornoFavoritos = await getFavoriteSongs();
-    this.setState({
-      musicFavoritas: retornoFavoritos,
-    });
-  };
-
-  onInpuntChanger = async (music) => {
-    this.setState({
-      loading: true });
-    const { musicFavoritas } = this.state;
-    if (musicFavoritas.some((e) => e.trackId === music.trackId)) {
-      await removeSong(music);
-      await this.requisicaoFavoritos();
-    } else {
-      await addSong(music);
-      await this.requisicaoFavoritos();
-    }
-    this.setState({
-      loading: false,
-    });
-  };
-
   render() {
-    const { api, loading, musicFavoritas } = this.state;
+    const { api } = this.state;
+    const { loading, musicFavoritas, onInpuntChanger } = this.props;
     return (
       <div data-testid="page-album">
         <Header />
@@ -75,7 +50,7 @@ class Album extends React.Component {
                     .map((e, index) => (
                       <MusicCard
                         key={ index }
-                        onInpuntChanger={ this.onInpuntChanger }
+                        onInpuntChanger={ onInpuntChanger }
                         objTrack={ e }
                         localStorageData={ musicFavoritas }
                       />))
@@ -90,6 +65,9 @@ class Album extends React.Component {
 }
 
 Album.propTypes = {
+  musicFavoritas: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  loading: PropTypes.bool.isRequired,
+  onInpuntChanger: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,

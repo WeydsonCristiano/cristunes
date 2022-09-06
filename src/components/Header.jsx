@@ -63,7 +63,7 @@ class Header extends React.Component {
                     style={ { backgroundColor: `${pathname
                     === '/favorites' ? 'grey' : 'azure'}` } }
                   >
-                    favorites
+                    Favoritas
 
                   </Link>
                 </li>

@@ -11,11 +11,11 @@ class MusicCard extends React.Component {
       objTrack,
       onInpuntChanger, localStorageData } = this.props;
     return (
-      <div>
+      <div className="divMusicas">
         <label
           htmlFor="favorita"
         >
-          favoritar
+          Favorita
           <input
             data-testid={ `checkbox-music-${trackId}` }
             id="favorita"

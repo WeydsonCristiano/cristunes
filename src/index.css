@@ -1,5 +1,6 @@
-:root{
-  --color:#2fc18c;;
+:root {
+  --color: #2fc18c;
+  ;
 }
 
 * {
@@ -11,7 +12,7 @@
 
 body {
   margin: 0;
-  font-family:-apple-system, sans-serif;
+  font-family: -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: url('https://img5.goodfon.com/wallpaper/nbig/7/51/kasety-muzyka-fon-1.jpg');
@@ -25,40 +26,71 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+    monospace;
 }
 
-.divInput{
-  text-align: center;
-  margin-top: 20px;
-  display:flex;
-  flex-flow: column;
-}
-
-.divInput button{
-  width: 20%;
-  margin: 10px auto;
-  letter-spacing: 2px;
+.divLogin img {
+  border-radius: 15%;
+  border: solid var(--color) 2px;
+  display: flex;
+  opacity: 0.7;
+  padding-bottom: 50px;
+  transform: translateY(-2rem);
   
 }
-.titulo {
+
+.divLogin {
+  border-radius: 50px;
+  display: flex;
+  flex-flow: column;
+  font-size: 1.2rem;
+  margin: 0 auto;
+  padding: 100px;
+  width: 30rem;
+}
+.divLogin input{
+  font-size: 1.5rem;
+  border: solid var(--color) 2px;
+  font-weight: 500;
+  color: black;
+
+}
+
+.divInput {
+  display: flex;
+  flex-flow: column;
+  margin-top: 20px;
   text-align: center;
+}
+
+.divInput button {
+  letter-spacing: 2px;
+  margin: 10px auto;
+  width: 20%;
+  
+}
+
+.titulo {
+  color:var(--color);
   font-size: 40px;
-  color:#2fc18c;
   font-weight: 900;
+  text-align: center;
 }
 
 h1 {
+  color: var(--color);
   text-align: center;
-  color:var(--color)
 }
-h2{
-  color:var(--color)
+
+h2 {
+  color: var(--color);
+  text-align: center;
 }
+
 a {
   color: white;
   margin: 2px;
-  text-decoration:none;
+  text-decoration: none;
 
 }
 
@@ -81,7 +113,7 @@ button {
 }
 
 button:hover {
-  background-color:#2fc18c;
+  background-color: var(--color);
   opacity: 0.7;
   transition: 0.5s;
 }
@@ -101,23 +133,41 @@ button:hover {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
   margin: 10px;
-  color:var(--color);
+  color: var(--color);
   min-width: 5rem;
   width: 10rem;
   gap: 1rem;
 }
-.divAlbum img{
-width: 10rem;
+
+.divAlbum img {
+  width: 10rem;
 }
 
-.divAlbum p{
+.divAlbum p {
   padding-bottom: 15px;
   font-size: 1.5rem;
   text-align: center;
 }
-.divAlbum:hover{
+
+.divAlbum:hover {
   opacity: 0.7;
   transition: 0.8s;
   transform: translateY(-2rem);
-  font-weight:900;
+  font-weight: 900;
+}
+.divMusicas{
+  width: 30%;
+  margin: 0 auto;
+  color: rgb(202, 66, 66);
+  font-size: 1.3rem;
+  font-weight: 900;
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  padding-top: 1%;
+}
+.divMusicas:hover{
+  opacity: 0.7;
+  transition: 0.8s;
+  transform:scale(1.1)
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import Loading from '../Loading';
+import img from '../assets/logo2.svg';
 
 class Login extends React.Component {
   state = {
@@ -23,7 +24,9 @@ class Login extends React.Component {
     const { nome, loading, habilitar } = this.state;
     const magicNumber = 3;
     return (
-      <div data-testid="page-login">
+      <div className="divLogin" data-testid="page-login">
+        <img src={ img } alt="logo" width="150px" height="150px" />
+        login:
         <input
           data-testid="login-name-input"
           type="text"
