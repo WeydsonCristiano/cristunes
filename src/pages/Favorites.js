@@ -13,7 +13,6 @@ class Favorites extends React.Component {
     console.log(musicFavoritas);
     return (
       <div data-testid="page-favorites">
-        favorites
         <Header />
         { loading ? <Loading />
           : (

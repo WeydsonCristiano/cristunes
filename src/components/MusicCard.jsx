@@ -8,8 +8,7 @@ class MusicCard extends React.Component {
   render() {
     const {
       objTrack: { trackName, previewUrl, trackId },
-      objTrack,
-      onInpuntChanger, localStorageData } = this.props;
+      objTrack, onInpuntChanger, localStorageData } = this.props;
     return (
       <div className="divMusicas">
         <label
@@ -21,7 +20,7 @@ class MusicCard extends React.Component {
             id="favorita"
             name="favorita"
             type="checkbox"
-            defaultChecked={
+            checked={
               localStorageData.some((e) => e.trackId === objTrack.trackId)
             }
             onClick={ () => onInpuntChanger(objTrack) }

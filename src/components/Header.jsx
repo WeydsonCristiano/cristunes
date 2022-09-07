@@ -52,8 +52,7 @@ class Header extends React.Component {
                     style={ { backgroundColor: `${pathname
                       === '/search' ? 'grey' : 'azure'}` } }
                   >
-                    search
-
+                    Search
                   </Link>
                 </li>
                 <li>
@@ -64,7 +63,6 @@ class Header extends React.Component {
                     === '/favorites' ? 'grey' : 'azure'}` } }
                   >
                     Favoritas
-
                   </Link>
                 </li>
                 <li>
@@ -74,8 +72,7 @@ class Header extends React.Component {
                     style={ { backgroundColor: `${pathname
                     === '/profile' ? 'grey' : 'azure'}` } }
                   >
-                    profile
-
+                    Profile
                   </Link>
                 </li>
               </ul>
