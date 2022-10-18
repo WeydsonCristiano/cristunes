@@ -106,7 +106,7 @@ class ProfileEdit extends React.Component {
               data-testid="edit-button-save"
               type="button"
               onClick={ this.onClickButton }
-              disabled={ nome.length === "" }
+              disabled={ name === '' || email === '' || description === '' }
             >
               Salvar
 
